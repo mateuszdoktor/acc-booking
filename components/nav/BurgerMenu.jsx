@@ -7,7 +7,7 @@ export default function BurgerMenu() {
     <div>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-700 rounded-full w-12 h-12 items-center justify-center flex text-xl text-white hover:scale-105 transition-all duration-200 cursor-pointer hover:shadow-md hover:bg-gradient-to-r hover:from-yellow-500 hover:via-orange-500 hover:to-pink-800"
+        className=" bg-red-400 rounded-full w-12 h-12 items-center justify-center flex text-xl text-white hover:bg-red-500 "
       >
         <Menu />
       </button>

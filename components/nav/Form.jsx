@@ -1,26 +1,17 @@
 import { Search } from "lucide-react";
 export default function Form() {
   return (
-    <div className="p-4 mt-12 bg-white border border-orange-400 rounded-3xl shadow-md">
-      <form className="flex flex-row gap-8">
+    <div className="border rounded-4xl shadow-lg bg-white focus-within:bg-stone-100 ">
+      <form className="flex flex-row items-center pr-2">
         <Input
           type="text"
           label="Destination"
           placeholder="Choose your destination"
-          classes="border-r-2 border-stone-300 pr-4"
         />
-        <Input
-          type="date"
-          label="Check-in"
-          classes="border-r-2 border-stone-300 pr-4"
-        />
-        <Input
-          type="date"
-          label="Check-out"
-          classes="border-r-2 border-stone-300 pr-4"
-        />
-        <Input type="number" label="Guests" placeholder="0" classes="w-8" />
-        <button className="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-700 rounded-full w-12 h-12 items-center justify-center flex text-xl text-white hover:scale-105 transition-all duration-200 cursor-pointer hover:shadow-md hover:bg-gradient-to-r hover:from-yellow-500 hover:via-orange-500 hover:to-pink-800">
+        <Input type="date" label="Check-in" />
+        <Input type="date" label="Check-out" />
+        <Input type="number" label="Guests" placeholder="0" classes="w-24" />
+        <button className="bg-red-400 rounded-full w-14 h-14 flex items-center justify-center text-xl text-white hover:bg-red-500 hover:scale-102 transition-all duration-200 ">
           <Search />
         </button>
       </form>
@@ -30,9 +21,24 @@ export default function Form() {
 
 function Input({ type = "text", label = "", placeholder = "", classes = "" }) {
   return (
-    <div className={`flex flex-col ${classes}`}>
-      <label className="text-sm font-semibold">{label}</label>
-      <input placeholder={placeholder} type={type}></input>
-    </div>
+    <label
+      className={`${classes} rounded-4xl px-8 py-4 
+        hover:bg-stone-100 
+        focus-within:bg-white 
+        focus-within:shadow-xl 
+        focus-within:hover:bg-white
+        transition-all duration-200
+      `}
+    >
+      <span className="text-xs font-medium">{label}</span>
+      <div className="flex flex-col">
+        <input
+          placeholder={placeholder}
+          type={type}
+          className="focus:outline-none text-md bg-transparent"
+        />
+      </div>
+    </label>
   );
 }
+

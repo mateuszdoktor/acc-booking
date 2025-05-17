@@ -1,6 +1,8 @@
 "use client";
 import { Menu } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
+
 export default function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -12,11 +14,26 @@ export default function BurgerMenu() {
         <Menu />
       </button>
       {isOpen && (
-        <div className="absolute top-32 right-10 bg-white border border-stone-200 rounded-3xl shadow-lg px-18 py-10 ">
-          <ul className="flex flex-col items-center gap-4">
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
+        <div className="absolute top-20 right-12 bg-white border border-stone-200 rounded-3xl shadow-lg">
+          <ul className="flex flex-col items-center text-md">
+            <Link
+              href="/"
+              className="hover:bg-stone-100 px-16 py-4 w-full rounded-t-3xl "
+            >
+              Sign in
+            </Link>
+            <Link href="/" className="hover:bg-stone-100 px-16 py-4 w-full ">
+              Sign up
+            </Link>
+            <Link href="/" className="hover:bg-stone-100 px-16 py-4 w-full ">
+              Become a host
+            </Link>
+            <Link
+              href="/"
+              className="hover:bg-stone-100 px-16 py-4 w-full rounded-b-3xl "
+            >
+              Get help
+            </Link>
           </ul>
         </div>
       )}

@@ -18,7 +18,7 @@ export default function BurgerMenu() {
         <Menu />
       </button>
       {isOpen && (
-        <div className="absolute top-20 right-12 bg-white border border-stone-200 rounded-3xl shadow-lg">
+        <div className="absolute top-26 right-12 bg-white border border-stone-200 rounded-3xl shadow-lg">
           <ul className="flex flex-col items-center text-md">
             {session?.user && <h3>Welcome {session.user.name}</h3>}
             <div
@@ -27,7 +27,7 @@ export default function BurgerMenu() {
             >
               {session ? <SignOutButton /> : <SignIn />}
             </div>
-            <Link href="/" className="hover:bg-stone-100 px-16 py-4 w-full ">
+            <Link href="/auth/signup" className="hover:bg-stone-100 px-16 py-4 w-full ">
               Sign up
             </Link>
             <Link href="/" className="hover:bg-stone-100 px-16 py-4 w-full ">

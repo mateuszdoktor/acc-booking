@@ -5,11 +5,11 @@ import Form from "./Form";
 import Menu from "./BurgerMenu";
 export default function Nav() {
   return (
-    <nav className=" bg-stone-50 shadow-sm px-12 py-6">
+    <nav className=" bg-stone-50 shadow-sm px-12 py-10">
       <div className="flex items-center justify-between ">
         <Link href="#">
           <div className="">
-            <Image src={logo} alt="logo" className="w-24 h-10" />
+            <Image src={logo} alt="logo" className="w-28 h-12" />
           </div>
         </Link>
         <Menu />

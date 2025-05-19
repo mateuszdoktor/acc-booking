@@ -1,10 +1,9 @@
-"use server"
+"use server";
 import { signUpSchema } from "@/lib/zod";
 import { saltAndHashPassword } from "@/utils/password";
-import { signUpUserService } from "@/lib/services/userService";
-import {} from "next/navigation";
+import { handleUserSignUp } from "@/lib/services/userService";
 
-export async function signUp(formData: FormData) {
+export async function handleSignUp(formData: FormData) {
   // Validate form fields
   const validatedFields = signUpSchema.safeParse({
     name: formData.get("name"),
@@ -22,6 +21,5 @@ export async function signUp(formData: FormData) {
   const hashedPassword = saltAndHashPassword(password);
 
   const userData = { name, email, password: hashedPassword };
-  await signUpUserService(userData);
-    
+  await handleUserSignUp(userData);
 }

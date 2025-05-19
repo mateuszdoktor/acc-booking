@@ -3,8 +3,9 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { SignIn } from "../auth/signin-button";
-import { SignOutButton } from "../auth/signout-button";
+import { SignInButton } from "../auth/buttons/sign-in-button";
+import { SignOutButton } from "../auth/buttons/sign-out-button";
+
 export default function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
@@ -25,9 +26,12 @@ export default function BurgerMenu() {
               href="/"
               className="hover:bg-stone-100 px-16 py-4 w-full rounded-t-3xl "
             >
-              {session ? <SignOutButton /> : <SignIn />}
+              {session ? <SignOutButton /> : <SignInButton />}
             </div>
-            <Link href="/auth/signup" className="hover:bg-stone-100 px-16 py-4 w-full ">
+            <Link
+              href="/auth/signup"
+              className="hover:bg-stone-100 px-16 py-4 w-full "
+            >
               Sign up
             </Link>
             <Link href="/" className="hover:bg-stone-100 px-16 py-4 w-full ">

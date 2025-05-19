@@ -1,11 +1,12 @@
 "use client";
 import Nav from "@/components/nav/Nav";
-import {SignIn} from "@/components/auth/signin-button"
+import { SignInButton } from "@/components/auth/buttons/sign-in-button";
+
 export default function Home() {
   return (
     <main className="">
       <Nav />
-      <SignIn />
+      <SignInButton />
     </main>
   );
 }

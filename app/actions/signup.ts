@@ -1,7 +1,8 @@
 "use server";
 import { signUpSchema } from "@/lib/zod";
 import { saltAndHashPassword } from "@/utils/password";
-import { handleUserSignUp } from "@/lib/services/userService";
+import { handleUserCreation, checkUserExists } from "@/utils/db";
+import { User } from "@/utils/db";
 
 export async function handleSignUp(formData: FormData) {
   // Validate form fields
@@ -20,6 +21,18 @@ export async function handleSignUp(formData: FormData) {
   const { name, email, password } = validatedFields.data;
   const hashedPassword = saltAndHashPassword(password);
 
-  const userData = { name, email, password: hashedPassword };
-  await handleUserSignUp(userData);
+  const userData: User = { name, email, password: hashedPassword };
+
+  const emailExists = await checkUserExists(email);
+  if (emailExists)
+    return {
+      errors: { message: "Email is already in use" },
+    };
+
+const userCreation = await handleUserCreation(userData);
+if (!userCreation) {
+  return { errors: { message: "Something went wrong creating your account" } };
+}
+return { success: true };
+
 }

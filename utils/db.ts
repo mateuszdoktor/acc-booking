@@ -4,7 +4,7 @@ import { comparePasswords } from "./password";
 const prisma = new PrismaClient();
 
 export interface User {
-  id: string;
+  id?: string;
   email: string;
   name?: string | null;
   password: string | null;
@@ -32,4 +32,14 @@ export const getUserFromDb = async (
   }
 
   return user;
+};
+
+export const checkUserExists = async (email: string): Promise<boolean> => {
+  const user = await prisma.user.findUnique({ where: { email } });
+  return user ? true : false;
+};
+
+export const handleUserCreation = async (userData: User): Promise<boolean> => {
+  const newUser = await prisma.user.create({ data: { ...userData } });
+  return newUser ? true : false;
 };

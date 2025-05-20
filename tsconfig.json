@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/auth/forms/sign-up-form.jsx"
+    "components/auth/forms/sign-up-form.tsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,11 +1,13 @@
 "use client";
+
 import { handleSignUp } from "@/app/actions/signup";
 import { useActionState } from "react";
 import { User, Mail, Lock } from "lucide-react";
 import { AuthForm, Input } from "./auth-form";
 import { startTransition } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { signIn } from "next-auth/react";
 
 type SignUpState = {
   success?: boolean;
@@ -18,17 +20,38 @@ type SignUpState = {
 };
 
 export function SignUpForm() {
+  const router = useRouter();
+  const formDataRef = useRef<FormData | null>(null);
+
   const [state, action, pending] = useActionState<SignUpState, FormData>(
-    async (_prevState, formData) => await handleSignUp(formData),
+    async (_prevState, formData) => {
+      formDataRef.current = formData;
+      return await handleSignUp(formData);
+    },
     { errors: {} }
   );
 
-  const router = useRouter();
-
   useEffect(() => {
-    if (state?.success) {
-      router.push("/auth/signin");
-    }
+    const tryAutoLogin = async () => {
+      if (state?.success && formDataRef.current) {
+        const email = formDataRef.current.get("email") as string;
+        const password = formDataRef.current.get("password") as string;
+
+        const res = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
+
+        if (res?.ok) {
+          router.push("/");
+        } else {
+          console.error("Auto-login failed", res?.error);
+        }
+      }
+    };
+
+    tryAutoLogin();
   }, [state, router]);
 
   return (

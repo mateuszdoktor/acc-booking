@@ -25,7 +25,7 @@ const Input: React.FC<InputProps> = ({
   <div className="flex flex-col gap-1">
     <label
       htmlFor={`credentials-${field}`}
-      className="flex flex-row focus-within:border-2 focus-within:border-red-400 focus-within:bg-white focus:scale-103 transition-all duration-200 rounded-3xl p-2"
+      className="flex flex-row focus-within:ring-2 focus-within:ring-red-400 focus-within:bg-white transition-all duration-200 rounded-3xl p-2"
     >
       {icon}
       <input
@@ -77,14 +77,12 @@ export function AuthForm({
           </Link>
           <span className="text-stone-800 text-xl font-bold pb-4">{title}</span>
           <span className="text-stone-500 text-md mb-2">{subtitle}</span>
-          {error && (
-            <div className="text-red-600 my-2">{error}</div>
-          )}
+          {error && <div className="text-red-600 my-2">{error}</div>}
         </div>
         {children}
         <button
           disabled={isLoading}
-          className="bg-red-400 rounded-3xl p-2 hover:bg-red-500 hover:scale-103 transition-all duration-200 text-white flex justify-center"
+          className="bg-red-400 rounded-3xl p-2 hover:bg-red-500 transition-all duration-200 text-white flex justify-center"
         >
           {isLoading ? (
             "Submitting..."

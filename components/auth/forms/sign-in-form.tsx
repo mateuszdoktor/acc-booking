@@ -4,10 +4,9 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Mail, Lock } from "lucide-react";
 import { AuthForm, Input } from "./auth-form";
-
+import { AuthHeader } from "../auth-header";
 
 export function SignInForm() {
-
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
   const error = searchParams.get("error");
@@ -21,7 +20,6 @@ export function SignInForm() {
       callbackUrl,
     });
   };
-  
 
   return (
     <AuthForm
@@ -35,6 +33,7 @@ export function SignInForm() {
       }
       onSubmit={handleSubmit}
     >
+      <AuthHeader title="Sign Up" subtitle="Create your account" />
       <Input
         isLoading={isLoading}
         icon={<Mail />}

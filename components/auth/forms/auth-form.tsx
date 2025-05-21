@@ -1,9 +1,7 @@
-"use client";
 import { ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
-import Image from "next/image";
-import logo from "@/public/logo.png";
 import Link from "next/link";
+import { AuthHeader } from "../auth-header";
 
 type InputField = "email" | "password" | "name";
 
@@ -53,8 +51,6 @@ interface AuthFormProps {
 }
 
 export function AuthForm({
-  title,
-  subtitle,
   isLoading,
   error,
   onSubmit,
@@ -71,15 +67,9 @@ export function AuthForm({
         }}
         className="flex flex-col gap-4 bg-stone-100 rounded-2xl p-12"
       >
-        <div className="flex flex-col items-center">
-          <Link href="/">
-            <Image src={logo} alt="logo" className="w-16 h-20 mb-8" />
-          </Link>
-          <span className="text-stone-800 text-xl font-bold pb-4">{title}</span>
-          <span className="text-stone-500 text-md mb-2">{subtitle}</span>
-          {error && <div className="text-red-600 my-2">{error}</div>}
-        </div>
         {children}
+        {error && <div className="text-red-600 my-2">{error}</div>}
+
         <button
           disabled={isLoading}
           className="bg-red-400 rounded-3xl p-2 hover:bg-red-500 transition-all duration-200 text-white flex justify-center"

@@ -8,6 +8,7 @@ import { startTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { signIn } from "next-auth/react";
+import { AuthHeader } from "../auth-header";
 
 type SignUpState = {
   success?: boolean;
@@ -65,6 +66,8 @@ export function SignUpForm() {
       isSignIn={false}
       error={state?.errors?.message}
     >
+      <AuthHeader title="Sign Up" subtitle="Create your account" />
+
       <Input
         isLoading={pending}
         icon={<User />}

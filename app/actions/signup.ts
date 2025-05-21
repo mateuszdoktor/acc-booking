@@ -5,7 +5,6 @@ import { handleUserCreation, checkUserExists } from "@/utils/db";
 import { User } from "@/utils/db";
 
 export async function handleSignUp(formData: FormData) {
-  // Validate form fields
   const validatedFields = signUpSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),

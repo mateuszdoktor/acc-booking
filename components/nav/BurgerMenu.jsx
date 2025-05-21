@@ -52,8 +52,7 @@ export default function BurgerMenu({ name }) {
               </Link>
             </li>
 
-            {/* separator */}
-            <div className="h-px bg-stone-200 w-full mx-4 my-1" />
+            <div className="h-px bg-stone-200 my-1 mx-4" />
 
             <li className="px-4 py-4">
               <Link
@@ -86,8 +85,7 @@ export default function BurgerMenu({ name }) {
               </Link>
             </li>
 
-            {/* separator */}
-            <div className="h-px bg-stone-200 w-full mx-4 my-1" />
+            <div className="h-px bg-stone-200 my-1 mx-4" />
 
             <li className="px-4 py-4">
               {name ? (

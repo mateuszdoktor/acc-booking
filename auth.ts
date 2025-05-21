@@ -7,8 +7,6 @@ import { ZodError } from "zod";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
@@ -19,18 +17,43 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             credentials
           );
           const user = await getUserFromDb(email, password);
-          return user || null;
-        } catch (error) {
-          if (error instanceof ZodError) {
-            return null;
+
+          if (user) {
+            return {
+              id: user.id!,
+              email: user.email,
+              name: user.name,
+              image: user.image, 
+            };
           }
+
+          return null;
+        } catch (error) {
+          if (error instanceof ZodError) return null;
           return null;
         }
       },
     }),
   ],
-  // Custom pages for different authentication states
+
   pages: {
-    signIn: "/auth/signin", // Custom sign-in page path
+    signIn: "/auth/signin",
+  },
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (session.user && token.id) {
+        session.user.id = token.id as string;
+        session.user.image = token.image as string | null; 
+      }
+      return session;
+    },
   },
 });

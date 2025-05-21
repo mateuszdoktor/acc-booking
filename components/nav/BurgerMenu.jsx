@@ -24,6 +24,15 @@ export default function BurgerMenu() {
         <div className="absolute top-26 right-12 bg-white border border-stone-200 rounded-3xl shadow-lg w-xs">
           <ul className="flex flex-col items-center text-md">
             {session?.user && <h3>Welcome {session.user.name}</h3>}
+            {session?.user && (
+              <Image
+                src={session.user.image}
+                alt="Avatar użytkownika"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
+            )}
             <div
               href="/"
               className="hover:bg-stone-100 px-4 py-4 w-full rounded-t-3xl "

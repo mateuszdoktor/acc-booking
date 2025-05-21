@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { AuthHeader } from "../auth-header";
 
 type InputField = "email" | "password" | "name";
 

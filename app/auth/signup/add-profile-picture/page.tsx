@@ -1,47 +1,16 @@
-"use client";
-
-import { UploadButton } from "@/utils/uploadthing";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { AuthHeader } from "@/components/auth/auth-header";
+import { ProfilePictureForm } from "@/components/auth/forms/profile-picture-form";
 
 export default function AddProfilePicturePage() {
-  const [uploading, setUploading] = useState(false);
-  const router = useRouter();
-
   return (
-    <main className="max-w-xl mx-auto mt-10 p-4">
-      <h1 className="text-2xl font-semibold mb-4">Add profile picture</h1>
-
-      <UploadButton
-        endpoint="imageUploader"
-        onUploadBegin={() => setUploading(true)}
-        onUploadError={() => {
-          setUploading(false);
-        }}
-        onClientUploadComplete={async (res) => {
-          setUploading(false);
-          if (!res || !res[0]?.url) {
-            return;
-          }
-
-          const imageUrl = res[0].url;
-
-          const response = await fetch("/api/update-profile-image", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ imageUrl }),
-          });
-
-          if (response.ok) {
-            router.push("/"); 
-          } else {
-          }
-        }}
-      />
-
-      {uploading && <p className="mt-4 text-sm text-gray-500">Sending...</p>}
-    </main>
+    <div className="flex justify-center items-center h-screen">
+      <div className="flex flex-col gap-4 bg-stone-100 rounded-2xl p-12 max-w-md w-full">
+        <AuthHeader
+          title="Add profile picture"
+          subtitle="Upload an image to set as your profile picture"
+        />
+        <ProfilePictureForm />
+      </div>
+    </div>
   );
 }

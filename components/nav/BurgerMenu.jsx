@@ -7,31 +7,47 @@ import { SignInButton } from "../auth/buttons/sign-in-button";
 import { SignOutButton } from "../auth/buttons/sign-out-button";
 import house from "@/public/house-icon.png";
 import Image from "next/image";
+import defaultAvatar from "@/public/default-avatar.png";
 
 export default function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return (
+      <div className="bg-red-400 rounded-full w-12 h-12 flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className=" bg-red-400 rounded-full w-12 h-12 items-center justify-center flex text-xl text-white hover:bg-red-500 "
+        className="bg-red-400 rounded-full w-12 h-12 items-center justify-center flex text-xl text-white hover:bg-red-500"
       >
         <Menu />
       </button>
       {isOpen && (
-        <div className="absolute top-26 right-12 bg-white border border-stone-200 rounded-3xl shadow-lg w-xs">
+        <div className="absolute top-26 right-12 bg-white border border-stone-200 rounded-3xl shadow-lg w-xs z-50">
           <ul className="flex flex-col items-center text-md">
-            {session?.user && <h3>Welcome {session.user.name}</h3>}
             {session?.user && (
-              <Image
-                src={session.user.image}
-                alt="Avatar użytkownika"
-                width={40}
-                height={40}
-                className="rounded-full object-cover"
-              />
+              <div className="flex flex-col items-center p-4 w-full">
+                <h3 className="font-medium mb-2">
+                  Welcome {session.user.name}
+                </h3>
+                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-stone-200">
+                  <Image
+                    src={session.user.image || defaultAvatar}
+                    alt="User avatar"
+                    fill
+                    className="object-cover"
+                    sizes="64px"
+                    priority
+                  />
+                </div>
+              </div>
             )}
             <div
               href="/"

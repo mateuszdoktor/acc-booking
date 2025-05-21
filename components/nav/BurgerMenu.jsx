@@ -2,59 +2,30 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import { SignInButton } from "../auth/buttons/sign-in-button";
 import { SignOutButton } from "../auth/buttons/sign-out-button";
 import house from "@/public/house-icon.png";
 import Image from "next/image";
-import defaultAvatar from "@/public/default-avatar.png";
 
-export default function BurgerMenu() {
+export default function BurgerMenu({ name }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: session, status } = useSession();
-
-  if (status === "loading") {
-    return (
-      <div className="bg-red-400 rounded-full w-12 h-12 flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
 
   return (
     <div>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="bg-red-400 rounded-full w-12 h-12 items-center justify-center flex text-xl text-white hover:bg-red-500"
+        className="bg-red-400 rounded-full w-10 h-10 items-center justify-center flex text-xl text-white hover:bg-red-500"
       >
         <Menu />
       </button>
       {isOpen && (
-        <div className="absolute top-26 right-12 bg-white border border-stone-200 rounded-3xl shadow-lg w-xs z-50">
+        <div className="absolute top-26 right-12 bg-white border border-stone-200 rounded-3xl shadow-lg w-64 z-50">
           <ul className="flex flex-col items-center text-md">
-            {session?.user && (
+            {name && (
               <div className="flex flex-col items-center p-4 w-full">
-                <h3 className="font-medium mb-2">
-                  Welcome {session.user.name}
-                </h3>
-                <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-stone-200">
-                  <Image
-                    src={session.user.image || defaultAvatar}
-                    alt="User avatar"
-                    fill
-                    className="object-cover"
-                    sizes="64px"
-                    priority
-                  />
-                </div>
+                <h3 className="font-medium mb-2">Welcome {name}</h3>
               </div>
             )}
-            <div
-              href="/"
-              className="hover:bg-stone-100 px-4 py-4 w-full rounded-t-3xl "
-            >
-              {session ? <SignOutButton /> : <SignInButton />}
-            </div>
 
             <Link href="/" className="hover:bg-stone-100 px-4 py-4 w-full ">
               <div className="flex">
@@ -70,12 +41,15 @@ export default function BurgerMenu() {
                 </div>
               </div>
             </Link>
-            <Link
+            <Link href="/" className="hover:bg-stone-100 px-4 py-4 w-full">
+              Get help
+            </Link>
+            <div
               href="/"
               className="hover:bg-stone-100 px-4 py-4 w-full rounded-b-3xl "
             >
-              Get help
-            </Link>
+              {name ? <SignOutButton /> : <SignInButton />}
+            </div>
           </ul>
         </div>
       )}

@@ -4,13 +4,18 @@ import Link from "next/link";
 import Form from "./Form";
 import Menu from "./BurgerMenu";
 import { HousePlus } from "lucide-react";
-export default function Nav() {
+import UserAvatar from "@/components/nav/UserAvatar";
+import { auth } from "@/auth";
+
+export default async function Nav() {
+  const session = await auth();
+
   return (
     <nav className=" bg-stone-50 shadow-sm px-12 py-10">
       <div className="flex items-center justify-between ">
         <Link href="/">
           <div className="">
-            <Image src={logo} alt="logo" className="w-28 h-12" />
+            <Image src={logo} alt="logo" className="w-22 h-8" />
           </div>
         </Link>
         <div className="flex flex-row items-center gap-6 font-semibold">
@@ -21,7 +26,10 @@ export default function Nav() {
             <HousePlus />
             Become a host
           </Link>
-          <Menu />
+          {session?.user?.image && (
+            <UserAvatar userImage={session.user.image} />
+          )}
+          <Menu name={session?.user.name} />
         </div>
       </div>
       <div className="flex justify-center pt-8">

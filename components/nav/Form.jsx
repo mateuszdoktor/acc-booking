@@ -11,7 +11,7 @@ export default function Form() {
         <Input type="date" label="Check-in" />
         <Input type="date" label="Check-out" />
         <Input type="number" label="Guests" placeholder="0" classes="w-24" />
-        <button className="bg-red-400 rounded-full w-14 h-14 flex items-center justify-center text-xl text-white hover:bg-red-500 hover:scale-102 transition-all duration-200 mx-4">
+        <button className="bg-red-400 rounded-full w-12 h-12 flex items-center justify-center text-xl text-white hover:bg-red-500 hover:scale-102 transition-all duration-200 mx-4">
           <Search />
         </button>
       </form>

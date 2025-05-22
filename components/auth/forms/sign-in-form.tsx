@@ -33,7 +33,7 @@ export function SignInForm() {
       }
       onSubmit={handleSubmit}
     >
-      <AuthHeader title="Sign Up" subtitle="Create your account" />
+      <AuthHeader title="Log in" subtitle="Create your account" />
       <Input
         isLoading={isLoading}
         icon={<Mail />}

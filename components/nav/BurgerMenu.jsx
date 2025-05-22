@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, DoorOpen, Heart, User } from "lucide-react";
+import { Menu, DoorOpen, Heart, User, CircleHelp } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { SignInButton } from "../auth/buttons/sign-in-button";
@@ -15,7 +15,7 @@ export default function BurgerMenu({ name }) {
     <div className="relative">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="bg-red-400 hover:bg-red-500 transition-colors rounded-full w-10 h-10 flex items-center justify-center text-white"
+        className="bg-rose-500 hover:bg-rose-600 transition-colors rounded-full w-10 h-10 flex items-center justify-center text-white"
         aria-label="Toggle menu"
       >
         <Menu className="w-5 h-5" />
@@ -44,7 +44,7 @@ export default function BurgerMenu({ name }) {
 
             <li>
               <Link
-                href="/"
+                href="/profile/info"
                 className="flex items-center gap-3 px-4 py-3 hover:bg-stone-100 transition-colors"
               >
                 <User className="w-5 h-5 text-gray-600" />
@@ -79,9 +79,10 @@ export default function BurgerMenu({ name }) {
             <li>
               <Link
                 href="/"
-                className="block px-4 py-3 hover:bg-stone-100 transition-colors"
+                className="flex items-center gap-3 px-4 py-3 hover:bg-stone-100 transition-colors"
               >
-                Get help
+                <CircleHelp className="w-5 h-5 text-gray-600" />
+                <span> Get help</span>
               </Link>
             </li>
 

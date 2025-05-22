@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = ({
   <div className="flex flex-col gap-1">
     <label
       htmlFor={`credentials-${field}`}
-      className="flex flex-row focus-within:ring-2 focus-within:ring-red-400 focus-within:bg-white transition-all duration-200 rounded-3xl p-2"
+      className="flex flex-row focus-within:ring-2 focus-within:ring-rose-500 focus-within:bg-white transition-all duration-200 rounded-3xl p-2"
     >
       {icon}
       <input
@@ -71,7 +71,7 @@ export function AuthForm({
 
         <button
           disabled={isLoading}
-          className="bg-red-400 rounded-3xl p-2 hover:bg-red-500 transition-all duration-200 text-white flex justify-center"
+          className="bg-rose-500 rounded-3xl p-2 hover:bg-rose-600 transition-all duration-200 text-white flex justify-center"
         >
           {isLoading ? (
             "Submitting..."
@@ -90,7 +90,7 @@ export function AuthForm({
           </span>
           <Link
             href={isSignIn ? "/auth/signup" : "/auth/signin"}
-            className="text-red-400 font-semibold hover:text-red-500 hover:underline transition-colors"
+            className="text-rose-500 font-semibold hover:text-rose-600 hover:underline transition-colors"
           >
             {isSignIn ? "Sign up" : "Sign in"}
           </Link>

@@ -1,21 +1,23 @@
 "use client";
 
 import { UploadButton } from "@/utils/uploadthing";
-import { useRouter } from "next/navigation";
-import { useState, useCallback, useTransition } from "react";
-import { ChevronRight, X, Check } from "lucide-react";
+import { useState, useCallback } from "react";
+import { X, Check } from "lucide-react";
 import Image from "next/image";
 
-export function ProfilePictureForm({ }: { editing?: boolean }) {
-  const router = useRouter();
+export function EditProfilePictureForm({
+  initialImage,
+  onSuccess,
+}: {
+  initialImage?: string | null;
+  onSuccess: (newImage: string) => void;
+}) {
   const [uploading, setUploading] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
 
   const handleUploadComplete = useCallback(async () => {
     if (!imagePreview || uploading) return;
-
     setUploading(true);
     setError(null);
     try {
@@ -26,9 +28,8 @@ export function ProfilePictureForm({ }: { editing?: boolean }) {
         },
         body: JSON.stringify({ imageUrl: imagePreview }),
       });
-
       if (response.ok) {
-        router.push("/");
+        onSuccess(imagePreview);
       } else {
         setError("Failed to update profile image.");
       }
@@ -37,7 +38,7 @@ export function ProfilePictureForm({ }: { editing?: boolean }) {
     } finally {
       setUploading(false);
     }
-  }, [imagePreview, uploading, router]);
+  }, [imagePreview, uploading, onSuccess]);
 
   const removePreview = () => {
     setImagePreview(null);
@@ -89,7 +90,6 @@ export function ProfilePictureForm({ }: { editing?: boolean }) {
               className="object-cover"
             />
           </div>
-
           <div className="flex gap-4">
             <button
               onClick={removePreview}
@@ -115,21 +115,6 @@ export function ProfilePictureForm({ }: { editing?: boolean }) {
           {error && <div className="text-red-500 text-sm">{error}</div>}
         </div>
       )}
-
-      <button
-        onClick={() => startTransition(() => router.push("/"))}
-        className="mt-4 bg-transparent rounded-3xl p-2 hover:bg-stone-200 transition-all duration-200 text-stone-600 flex justify-center items-center gap-1 border border-stone-300 focus:ring-2 focus:ring-stone-400 focus:ring-offset-2 focus:outline-none"
-        disabled={isPending}
-      >
-        {isPending ? (
-          <span className="loading loading-spinner loading-xs text-stone-600" />
-        ) : (
-          <>
-            Skip for now
-            <ChevronRight className="w-4 h-4" />
-          </>
-        )}
-      </button>
     </>
   );
 }

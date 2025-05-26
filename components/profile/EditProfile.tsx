@@ -3,18 +3,26 @@ import Image from "next/image";
 import { ClipboardPen } from "lucide-react";
 import { useState } from "react";
 import { EditProfilePictureForm } from "./EditProfilePictureForm";
+import { EditProfileNameForm } from "./EditProfileNameForm";
 
 export default function EditProfile({
   userImage,
+  userName,
 }: {
   userImage?: string | null;
+  userName?: string | null;
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentImage, setCurrentImage] = useState(userImage || null);
+  const [currentName, setCurrentName] = useState(userName || "");
 
   return (
     <div>
       <h1 className="text-4xl font-bold">Edit your profile information</h1>
+      <EditProfileNameForm
+        initialName={currentName}
+        onSuccess={setCurrentName}
+      />
       {currentImage && (
         <section className="my-16">
           <header className="flex items-center gap-4 pb-6">

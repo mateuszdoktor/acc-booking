@@ -5,7 +5,10 @@ export default async function ProfileInfo() {
 
   return (
     <div className="h-full w-full p-16 text-2xl font-semibold bg-white">
-      <EditProfile userImage={session?.user?.image} />
+      <EditProfile
+        userImage={session?.user?.image}
+        userName={session?.user?.name || ""}
+      />
     </div>
   );
 }

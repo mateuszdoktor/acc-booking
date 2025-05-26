@@ -58,3 +58,19 @@ export const updateUserProfileImage = async (
     return false;
   }
 };
+
+export const updateUserName = async (
+  userId: string,
+  name: string
+): Promise<boolean> => {
+  try {
+    await prisma.user.update({
+      where: { id: userId },
+      data: { name },
+    });
+    return true;
+  } catch (error) {
+    console.error("error", error);
+    return false;
+  }
+};

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ClipboardPen } from "lucide-react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export function EditProfileNameForm({
   initialName,
@@ -14,6 +15,7 @@ export function EditProfileNameForm({
   const [nameInput, setNameInput] = useState(initialName);
   const [nameError, setNameError] = useState<string | null>(null);
   const [nameLoading, setNameLoading] = useState(false);
+  const { data: session } = useSession();
 
   const handleNameSave = async () => {
     setNameLoading(true);
@@ -28,6 +30,15 @@ export function EditProfileNameForm({
         setCurrentName(nameInput);
         setIsEditing(false);
         onSuccess(nameInput);
+        if (session?.user?.email) {
+          await signOut({ redirect: false });
+          await signIn("credentials", {
+            email: session.user.email,
+            password: localStorage.getItem("user-password") || "",
+            redirect: false,
+          });
+        }
+        window.dispatchEvent(new Event("profile-updated"));
       } else {
         setNameError("Failed to update name.");
       }

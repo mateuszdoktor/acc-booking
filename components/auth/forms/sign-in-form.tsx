@@ -14,9 +14,12 @@ export function SignInForm() {
 
   const handleSubmit = async (formData: FormData) => {
     setIsLoading(true);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    localStorage.setItem("user-password", password);
     await signIn("credentials", {
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
+      email,
+      password,
       callbackUrl,
     });
   };

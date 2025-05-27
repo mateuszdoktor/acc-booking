@@ -1,8 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
-
-export default async function UserAvatar({ userImage }) {
-
+export default function UserAvatar() {
+  const { data: session } = useSession();
+  const userImage = session?.user?.image || "/default-avatar.png";
 
   return (
     <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-stone-200">

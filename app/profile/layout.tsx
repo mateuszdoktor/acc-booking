@@ -1,5 +1,4 @@
 import Nav from "@/components/nav/Nav";
-import { auth } from "@/auth";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/cropped-logo.png";
@@ -12,8 +11,6 @@ export default async function ProfileLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
-
   return (
     <div className="min-h-screen flex flex-col bg-stone-50">
       <header className="">
@@ -23,10 +20,8 @@ export default async function ProfileLayout({
               <Image src={logo} alt="logo" className="w-36 h-10" />
             </Link>
             <div className="flex items-center gap-6 font-semibold">
-              {session?.user?.image && (
-                <UserAvatar userImage={session.user.image} />
-              )}
-              <Menu name={session?.user?.name} />
+              <UserAvatar />
+              <Menu />
             </div>
           </div>
         </Nav>

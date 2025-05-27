@@ -7,8 +7,11 @@ import { SignInButton } from "../auth/buttons/sign-in-button";
 import { SignOutButton } from "../auth/buttons/sign-out-button";
 import house from "@/public/house-icon.png";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
-export default function BurgerMenu({ name }) {
+export default function BurgerMenu() {
+  const { data: session } = useSession();
+  const name = session?.user?.name;
   const [isOpen, setIsOpen] = useState(false);
 
   return (

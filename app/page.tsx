@@ -6,11 +6,8 @@ import Form from "@/components/nav/Form";
 import Menu from "@/components/nav/BurgerMenu";
 import { HousePlus } from "lucide-react";
 import UserAvatar from "@/components/nav/UserAvatar";
-import { auth } from "@/auth";
 
 export default async function Home() {
-  const session = await auth();
-
   return (
     <main>
       <Nav>
@@ -28,10 +25,8 @@ export default async function Home() {
               <HousePlus />
               Become a host
             </Link>
-            {session?.user?.image && (
-              <UserAvatar userImage={session.user.image} />
-            )}
-            <Menu name={session?.user?.name} />
+            <UserAvatar />
+            <Menu />
           </div>
         </div>
         <div className="flex justify-center pt-8">

@@ -1,20 +1,28 @@
 "use client";
 import Image from "next/image";
 import { ClipboardPen } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { EditProfilePictureForm } from "./EditProfilePictureForm";
 import { EditProfileNameForm } from "./EditProfileNameForm";
 
-export default function EditProfile({
-  userImage,
-  userName,
-}: {
-  userImage?: string | null;
-  userName?: string | null;
-}) {
+export default function EditProfile() {
+  const { data: session, status } = useSession();
   const [isEditing, setIsEditing] = useState(false);
-  const [currentImage, setCurrentImage] = useState(userImage || null);
-  const [currentName, setCurrentName] = useState(userName || "");
+  const [currentImage, setCurrentImage] = useState<string | null>(null);
+  const [currentName, setCurrentName] = useState<string>("");
+
+  useEffect(() => {
+    if (session?.user) {
+      setCurrentImage(session.user.image || null);
+      setCurrentName(session.user.name || "");
+    }
+  }, [session]);
+
+  if (status === "loading") {
+    return <div>Loading profile...</div>;
+  }
+  
 
   return (
     <div>

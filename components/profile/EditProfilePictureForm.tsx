@@ -4,6 +4,7 @@ import { UploadButton } from "@/utils/uploadthing";
 import { useState, useCallback } from "react";
 import { X, Check } from "lucide-react";
 import Image from "next/image";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export function EditProfilePictureForm({
   initialImage,
@@ -15,6 +16,7 @@ export function EditProfilePictureForm({
   const [uploading, setUploading] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { data: session } = useSession();
 
   const handleUploadComplete = useCallback(async () => {
     if (!imagePreview || uploading) return;
@@ -30,6 +32,15 @@ export function EditProfilePictureForm({
       });
       if (response.ok) {
         onSuccess(imagePreview);
+        if (session?.user?.email) {
+          await signOut({ redirect: false });
+          await signIn("credentials", {
+            email: session.user.email,
+            password: localStorage.getItem("user-password") || "",
+            redirect: false,
+          });
+        }
+        window.dispatchEvent(new Event("profile-updated"));
       } else {
         setError("Failed to update profile image.");
       }
@@ -38,7 +49,7 @@ export function EditProfilePictureForm({
     } finally {
       setUploading(false);
     }
-  }, [imagePreview, uploading, onSuccess]);
+  }, [imagePreview, uploading, onSuccess, session]);
 
   const removePreview = () => {
     setImagePreview(null);

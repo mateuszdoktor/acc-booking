@@ -87,7 +87,7 @@ export function EditProfileNameForm({
               type="text"
               value={nameInput}
               onChange={(e) => setNameInput(e.target.value)}
-              className="border rounded-lg px-3 py-2 text-stone-800 focus:ring-2 focus:ring-red-400 focus:outline-none"
+              className="border rounded-lg px-3 py-2 text-stone-800 focus:ring-2 focus:ring-sky-400 focus:outline-none"
               disabled={nameLoading}
               maxLength={50}
             />
@@ -95,7 +95,7 @@ export function EditProfileNameForm({
               <button
                 onClick={handleNameSave}
                 disabled={nameLoading || !nameInput.trim()}
-                className="px-4 py-2 rounded-lg bg-red-400 hover:bg-red-500 text-white font-medium transition-colors disabled:bg-red-300"
+                className="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white font-medium transition-colors disabled:bg-sky-400"
               >
                 {nameLoading ? "Saving..." : "Save"}
               </button>

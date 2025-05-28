@@ -18,49 +18,51 @@ export default function BurgerMenu() {
     <div className="relative">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="bg-rose-500 hover:bg-rose-600 transition-colors rounded-full w-10 h-10 flex items-center justify-center text-white"
+        className="bg-sky-500 hover:bg-sky-600 transition-colors rounded-full w-10 h-10 flex items-center justify-center text-white"
         aria-label="Toggle menu"
       >
         <Menu className="w-5 h-5" />
       </button>
 
       {isOpen && (
-        <div className="absolute top-14 right-0 bg-white border border-stone-200 rounded-3xl shadow-xl w-72 z-50 overflow-hidden">
+        <div className="absolute top-14 right-0 bg-white border border-stone-200 rounded-3xl shadow-xl w-80 z-50 overflow-hidden">
           <ul className="flex flex-col text-base text-gray-800">
             {name && (
-              <li className="p-4 text-center">
+              <li className="px-6 py-4 text-center bg-gray-50">
                 <h3 className="text-sm font-medium text-gray-600">
                   Welcome <span className="font-semibold">{name}</span>
                 </h3>
               </li>
             )}
 
-            <li>
-              <Link
-                href="/"
-                className="flex items-center gap-3 px-4 py-3 hover:bg-stone-100 transition-colors"
-              >
-                <Heart className="w-5 h-5" />
-                <span>Wishlists</span>
-              </Link>
-            </li>
+            {session && (
+              <>
+                <li>
+                  <Link
+                    href="/"
+                    className="flex items-center gap-3 px-6 py-3 rounded-none transition-colors hover:bg-sky-50 hover:text-sky-600 focus:bg-sky-100 focus:text-sky-700 w-full"
+                  >
+                    <Heart className="w-5 h-5" />
+                    <span>Wishlists</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/profile/info"
+                    className="flex items-center gap-3 px-6 py-3 rounded-none transition-colors hover:bg-sky-50 hover:text-sky-600 focus:bg-sky-100 focus:text-sky-700 w-full"
+                  >
+                    <User className="w-5 h-5 text-gray-600" />
+                    <span>Profile</span>
+                  </Link>
+                </li>
+                <div className="h-px bg-stone-200 my-1 mx-6" />
+              </>
+            )}
 
             <li>
               <Link
-                href="/profile/info"
-                className="flex items-center gap-3 px-4 py-3 hover:bg-stone-100 transition-colors"
-              >
-                <User className="w-5 h-5 text-gray-600" />
-                <span>Profile</span>
-              </Link>
-            </li>
-
-            <div className="h-px bg-stone-200 my-1 mx-4" />
-
-            <li className="px-4 py-4">
-              <Link
                 href="/"
-                className="flex items-start gap-4 hover:bg-stone-100 rounded-xl p-2 transition-colors"
+                className="flex items-start gap-4 px-6 py-4 rounded-none transition-colors hover:bg-sky-50 hover:text-sky-600 focus:bg-sky-100 focus:text-sky-700 w-full"
               >
                 <div className="flex-1">
                   <p className="text-sm font-medium">Become a host</p>
@@ -82,24 +84,26 @@ export default function BurgerMenu() {
             <li>
               <Link
                 href="/"
-                className="flex items-center gap-3 px-4 py-3 hover:bg-stone-100 transition-colors"
+                className="flex items-center gap-3 px-6 py-3 rounded-none transition-colors hover:bg-sky-50 hover:text-sky-600 focus:bg-sky-100 focus:text-sky-700 w-full"
               >
                 <CircleHelp className="w-5 h-5 text-gray-600" />
                 <span> Get help</span>
               </Link>
             </li>
 
-            <div className="h-px bg-stone-200 my-1 mx-4" />
+            <div className="h-px bg-stone-200 my-1 mx-6" />
 
-            <li className="px-4 py-4">
-              {name ? (
-                <div className="flex items-center gap-2 hover:bg-stone-100 p-2 rounded-xl transition-colors">
-                  <DoorOpen className="w-5 h-5 text-gray-600" />
-                  <SignOutButton />
-                </div>
-              ) : (
-                <SignInButton />
-              )}
+            <li>
+              <div className="flex items-center gap-2 px-6 py-4 rounded-none transition-colors cursor-pointer hover:bg-sky-50 hover:text-sky-600 focus:bg-sky-100 focus:text-sky-700 w-full">
+                {name ? (
+                  <>
+                    <DoorOpen className="w-5 h-5 text-gray-600" />
+                    <SignOutButton />
+                  </>
+                ) : (
+                  <SignInButton />
+                )}
+              </div>
             </li>
           </ul>
         </div>

@@ -19,18 +19,18 @@ export default function EditProfile() {
     }
   }, [session]);
 
-  if (status === "loading") {
-    return <div>Loading profile...</div>;
-  }
-  
-
   return (
     <div>
       <h1 className="text-4xl font-bold">Edit your profile information</h1>
-      <EditProfileNameForm
-        initialName={currentName}
-        onSuccess={setCurrentName}
-      />
+      {status === "loading" ? (
+        <div>Loading profile...</div>
+      ) : (
+        <EditProfileNameForm
+          key={currentName}
+          initialName={currentName}
+          onSuccess={setCurrentName}
+        />
+      )}
       {currentImage && (
         <section className="my-16">
           <header className="flex items-center gap-4 pb-6">

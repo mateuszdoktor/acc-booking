@@ -64,19 +64,19 @@ export function EditProfilePictureForm({
             endpoint="imageUploader"
             appearance={{
               button: `
-                ut-ready:bg-red-400 
-                ut-uploading:bg-red-500 
+                ut-ready:bg-sky-500 
+                ut-uploading:bg-sky-600 
                 ut-uploading:cursor-not-allowed
-                bg-red-400 
+                bg-sky-500 
                 rounded-3xl 
                 p-2 
-                hover:bg-red-500 
+                hover:bg-sky-600 
                 transition-all 
                 duration-200 
                 text-white 
                 w-full
                 focus:ring-2 
-                focus:ring-red-400 
+                focus:ring-sky-500 
                 focus:ring-offset-2 
                 focus:outline-none
                 focus:shadow-none
@@ -113,7 +113,7 @@ export function EditProfilePictureForm({
             <button
               onClick={handleUploadComplete}
               disabled={uploading}
-              className="p-2 rounded-full bg-red-400 hover:bg-red-500 transition-colors disabled:bg-red-300 focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:outline-none"
+              className="p-2 rounded-full bg-sky-500 hover:bg-sky-600 transition-colors disabled:bg-sky-400 focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:outline-none"
               aria-label="Confirm"
             >
               {uploading ? (

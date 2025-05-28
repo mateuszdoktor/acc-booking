@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = ({
   <div className="flex flex-col gap-1">
     <label
       htmlFor={`credentials-${field}`}
-      className="flex flex-row focus-within:ring-2 focus-within:ring-rose-500 focus-within:bg-white transition-all duration-200 rounded-3xl p-2"
+      className="flex flex-row focus-within:ring-2 focus-within:ring-sky-500 focus-within:bg-white transition-all duration-200 rounded-3xl p-2"
     >
       {icon}
       <input
@@ -67,11 +67,11 @@ export function AuthForm({
         className="flex flex-col gap-4 bg-stone-100 rounded-2xl p-12"
       >
         {children}
-        {error && <div className="text-red-600 my-2">{error}</div>}
+        {error && <div className="text-sky-600 my-2">{error}</div>}
 
         <button
           disabled={isLoading}
-          className="bg-rose-500 rounded-3xl p-2 hover:bg-rose-600 transition-all duration-200 text-white flex justify-center"
+          className="bg-sky-500 rounded-3xl p-2 hover:bg-sky-600 transition-all duration-200 text-white flex justify-center"
         >
           {isLoading ? (
             "Submitting..."
@@ -90,7 +90,7 @@ export function AuthForm({
           </span>
           <Link
             href={isSignIn ? "/auth/signup" : "/auth/signin"}
-            className="text-rose-500 font-semibold hover:text-rose-600 hover:underline transition-colors"
+            className="text-sky-500 font-semibold hover:text-sky-600 hover:underline transition-colors"
           >
             {isSignIn ? "Sign up" : "Sign in"}
           </Link>

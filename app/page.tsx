@@ -20,7 +20,7 @@ export default async function Home() {
           <div className="flex flex-row items-center gap-6 font-semibold">
             <Link
               href="/auth/signup"
-              className="flex gap-2 rounded-3xl hover:bg-rose-500 hover:text-white hover:shadow-lg p-2 hover:scale-103 transition-all duration-200"
+              className="flex gap-2 rounded-3xl hover:bg-sky-500 hover:text-white hover:shadow-lg p-2 hover:scale-103 transition-all duration-200"
             >
               <HousePlus />
               Become a host
